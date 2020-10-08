@@ -1,0 +1,18 @@
+const mongoose = require('mongoose');
+const MusicSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true
+    }, 
+    link: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true
+    }
+});
+
+const Music = mongoose.model('Music', MusicSchema);
+module.exports = Music;

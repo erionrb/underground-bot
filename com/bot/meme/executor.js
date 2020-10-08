@@ -1,4 +1,3 @@
-
 var memeMap = {
     "pele" : "https://siasky.net/nABAy-1qKD0hd5AaEXBqZxlu3Fx_q2Y4-e4Da-1QfhadhQ"
 };
