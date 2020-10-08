@@ -23,6 +23,9 @@ client.on('message', async message => {
         return;
     }
 
+
+    
+
 	if (message.member.voice.channel) {
         const connection = await message.member.voice.channel.join();
         await connection.play(execute(message.content));
