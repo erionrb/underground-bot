@@ -1,0 +1,25 @@
+{
+  "name": "underground_bot",
+  "version": "1.0.0",
+  "description": "Bot para o time underground\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[Dmais underground de todos",
+  "main": "bot.js",
+  "scripts": {
+    "start": "nodemon bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot",
+    "underground",
+    "discord"
+  ],
+  "author": "erion\u001b[D\u001b[D\u001b[D\u001b[E\u001b[1;5C\u001b[1;5C\u001b[1;5C\u001b[1;5C\u001b[1;5CR Barasuol",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.3.2",
+    "discord.js": "^12.3.1",
+    "ffmpeg-static": "^4.2.7",
+    "mongoose": "^5.10.8",
+    "nodemon": "^2.0.4",
+    "ytdl-core": "^3.3.0"
+  }
+}
