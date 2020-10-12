@@ -1,17 +1,37 @@
-let musicSelector = require('../music/selector');
-let memeSelector = require('../meme/selector');
+let musicSelector = require('../music/musicSelector');
+let memeSelector = require('../music/musicSelector');
 const MusicSelector = musicSelector();
 const MemeSelector = memeSelector();
 
+const NOT_FOUND_TASK = () => {
+    return {
+        apply: (message, session) => {
+            message.reply('Cara você ta loco das idéias, manda alguma chave correta.');
+        }
+    };
+};
+const taskMap = {
+    'toca': MusicSelector,
+    'info': MusicSelector,
+    'meme': MemeSelector,
+    'NOT_FOUND' : NOT_FOUND_TASK
+};
+
+const findBotTask = (content) => {
+    for(let key in taskMap) {
+        if(content.includes(key)) {
+            return taskMap[key];    
+        }
+    }
+    return taskMap.NOT_FOUND;
+};
+
 const BotTask = () => {
     return {
-        select: (content) => {
-            if(content.includes('toca')) {
-                return MusicSelector.apply(content);
-            } else if (content.includes('meme')) {
-                return MemeSelector.apply(content);
-            }
-            return { type: 'ERROR', message: 'Cara você ta loco das idéias, manda alguma chave correta.' };
+        execute: (message, session) => {
+            const content = message.content;
+            const task = findBotTask(content);
+            task.apply(message, session);
         }
     }
 };

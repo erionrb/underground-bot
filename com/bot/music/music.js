@@ -9,6 +9,11 @@ const MusicSchema = new mongoose.Schema({
     link: {
         type: String,
         required: true,
+        trim: true
+    },
+    type: {
+        type: String,
+        required: true,
         trim: true,
         lowercase: true
     }
