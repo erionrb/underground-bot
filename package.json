@@ -20,6 +20,7 @@
     "ffmpeg-static": "^4.2.7",
     "mongoose": "^5.10.8",
     "nodemon": "^2.0.4",
+    "rxjs": "^6.6.3",
     "ytdl-core": "^3.3.0"
   }
 }

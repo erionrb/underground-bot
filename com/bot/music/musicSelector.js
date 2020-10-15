@@ -1,6 +1,7 @@
 const { TextChannel } = require('discord.js');
 const ytdl = require('ytdl-core');
-const MusicQueue = require('../common/musicQueue')();
+const musicQueue = require('../common/musicQueue')();
+const queueService = require('./queueService');
 
 const getInfo = (video, message) => {
     return new Promise((resolve, reject) => {
@@ -23,14 +24,8 @@ const getInfo = (video, message) => {
     });
 }
 
-const addToQueue = (music) => {
-    MusicQueue.addToExecution(music);
-};
-
 const play = async (music, message) => {
-    //let info = await getInfo(music, message);
-    addToQueue({ title: 'Before I Forget', link: music});
-    
+    let info = await getInfo(music, message);
     const voiceChannel = message.member.voice.channel;
     
     const connection = await voiceChannel.join();
@@ -40,30 +35,24 @@ const play = async (music, message) => {
         message.reply('Acabei meu trampo, saindo do channel!');
         voiceChannel.leave();
     });
-    message.reply(`Tocando: ${MusicQueue.getInExecution().title}`);
-};
-
-const findMusic = (music) => {
-    // Encontrar o link da musica no banco de dados
-    return '';
+    message.reply(`Tocando: ${musicQueue.getInExecution().title}`);
 };
 
 const MusicSelector = () => {
     return {
         apply: (message) => {
             const content = message.content;
-
             if(content.includes('info')) {
-                message.reply(`Tocando ${MusicQueue.getInExecution().title} agora!`);
+                message.reply(`Tocando ${musicQueue.getInExecution().title} agora!`);
                 return;
             }
 
-            let musicStr = content.split('toca')[1];
-            const music = musicStr;//findMusic(content);
+            const music = content.split('toca')[1];
             if(music == null || music == undefined) {
                 message.reply('Cara não encontrei essa música não!');
                 return;
             }
+
             play(music, message);
         },
     }

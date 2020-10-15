@@ -9,3 +9,11 @@ db.once('open', () => {
     console.log('DB connection opened.');
 });
 
+const DatabaseClient = () => {
+    return {
+        getConnection: () => db
+    };
+};
+
+module.exports = DatabaseClient;
+

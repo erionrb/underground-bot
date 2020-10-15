@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
 const client = new Discord.Client();
-const MusicQueue = require('./com/bot/common/musicQueue')();
-const BotTask = require("./com/bot/common/botTask")();
+const botTask = require("./com/bot/common/botTask")();
 
 client.once("ready", () => {
     console.log("Ready!");
@@ -22,7 +21,7 @@ client.on('message', async message => {
     }
 
 	if (message.member.voice.channel) {
-        BotTask.execute(message);
+        botTask.execute(message);
     } else {
         message.reply('Conecta no channel primeiro maluco!');
     }
