@@ -12,7 +12,7 @@ const NOT_FOUND_TASK = () => {
     };
 };
 const taskMap = {
-    'toca': musicObservable,
+    'toca': memeObservable,//musicObservable,
     'meme': memeObservable,
     'NOT_FOUND' : NOT_FOUND_TASK
 };
