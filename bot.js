@@ -16,7 +16,7 @@ client.once("disconnect", () => {
 });
 
 client.on('message', async message => {
-    if (!message.content.startsWith(prefix)) {
+    if (!message.content.startsWith('!bot')) {
         return;
     }
 
@@ -31,7 +31,7 @@ client.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
-client.login(token);
+client.login('NzYzMDM1MzQ2MjYxOTAxMzEy.X3x2Cw.FSSQCkXwz9rrb9AU3AJoH3j-xmY');
 
 
 
