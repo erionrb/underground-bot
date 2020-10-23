@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
-const music = require('../music/music');
+const Music = require('../music/music');
 const QueueSchema = new mongoose.Schema({
     id: String,
-    play: music,
-    next: [music]
+    play: Music.schema
 });
 
-const Music = mongoose.model('Music', QueueSchema);
-module.exports = Music;
+const Queue = {
+    model: mongoose.model('Queue', QueueSchema),
+    schema: QueueSchema
+};
+
+module.exports = Queue;

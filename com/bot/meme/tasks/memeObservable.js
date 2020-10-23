@@ -1,10 +1,10 @@
 const taskArray = new Array();
 
-const MusicObservable = () => {
+const MemeObservable = () => {
     return {
         subscribe: (taskFunction) => taskArray.push(taskFunction),
         notifyAll: (command) => {
-            console.log('MusicObservable.notifyAll: Notificando todos memes');
+            console.log('MemeObservable.notifyAll: Notificando todos memes');
             taskArray.forEach(taskFunction => {
                 taskFunction(command);
             });
@@ -12,4 +12,4 @@ const MusicObservable = () => {
     };
 };
 
-module.exports = MusicObservable;
+module.exports = MemeObservable;

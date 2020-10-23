@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-//const { prefix, token } = require("./config.json");
+const { prefix, token } = require("./config.json");
 const client = new Discord.Client();
 const botTask = require("./com/bot/common/botTask")();
 
@@ -16,7 +16,7 @@ client.once("disconnect", () => {
 });
 
 client.on('message', async message => {
-    if (!message.content.startsWith('!bot')) {
+    if (!message.content.startsWith(prefix)) {
         return;
     }
 
@@ -31,7 +31,7 @@ client.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
-client.login('NzYzMDM1MzQ2MjYxOTAxMzEy.X3x2Cw.FSSQCkXwz9rrb9AU3AJoH3j-xmY');
+client.login(token);
 
 
 

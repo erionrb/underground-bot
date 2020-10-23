@@ -1,8 +1,5 @@
-const databaseClient = require('../database/connection/client');
-const Music = require('../music/music');
+const databaseClient = require('../database/connection/client')();
 const Queue = require('./queue');
-
-const filter = { id: 'QUEUE-DEFAULT'};
 
 const logExecution = (message, object) => {
     console.log(`${message} => ${JSON.stringify(object)}`);
@@ -10,27 +7,21 @@ const logExecution = (message, object) => {
 
 const QueueRepository = () => {
     return {
-        addToQueue : async (music) => {
-            let queue = await Queue.find(filter).exec();
-            queue.next.push(music);
-            Queue.save().then(logExecution('Musica jogada para fila', music));
+        addToQueue : async (queue) => {
+            databaseClient.createConnection();
+            queue.save().then(logExecution('Musica jogada para fila', queue.play));
         },
 
-        addToExecution : (music)=> {
-            let queue = await Queue.find(filter).exec();
-            queue.play = music;
-            Queue.save().then(logExecution('Musica jogada para execucao', music));
+        getQueue : async () => {
+            databaseClient.createConnection();
+            return await Queue.model.find({}).exec();
         },
 
-        getInExecution : () => {
-            let queue = await Queue.find(filter).exec();
-            return queue.play;
-        },
-
-        getQueue : () => {
-            return await Queue.find(filter).exec();
+        delete: async (queue) => {
+            let _id = queue.id;
+            databaseClient.createConnection();
+            return Queue.model.deleteOne({id: _id}).exec();
         }
     };
 };
-
 module.exports = QueueRepository;
