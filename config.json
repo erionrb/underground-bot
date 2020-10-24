@@ -1,0 +1,5 @@
+{
+    "dbPasswd": "0vDY2CqKrm5eORHG",
+    "dbName": "underground-data",
+    "uri": "mongodb+srv://erion:${dbPasswd}@cluster0.pxjet.mongodb.net/${dbName}?retryWrites=true&w=majority"
+}

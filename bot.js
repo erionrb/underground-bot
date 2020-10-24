@@ -1,7 +1,8 @@
-const Discord = require("discord.js");
-const { prefix, token } = require("./config.json");
+const Discord = require('discord.js');
 const client = new Discord.Client();
-const botTask = require("./com/bot/common/botTask")();
+const botTask = require('./com/bot/common/botTask')();
+const configService = require('./com/bot/config/configService')();
+let Config = {};
 
 client.once("ready", () => {
     console.log("Ready!");
@@ -16,7 +17,7 @@ client.once("disconnect", () => {
 });
 
 client.on('message', async message => {
-    if (!message.content.startsWith(prefix)) {
+    if (!message.content.startsWith(Config.prefix)) {
         return;
     }
 
@@ -31,7 +32,23 @@ client.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
-client.login(token);
+async function init() {
+    await load();
+    login();
+}
+
+async function load() {
+    console.log("bot.init() => Recuperando configuracoes...");
+    let getConfig = async () => configService.findAll();
+    Config = await getConfig();
+}
+
+function login() {
+    client.login(Config.token);
+}
+
+init();
+
 
 
 
