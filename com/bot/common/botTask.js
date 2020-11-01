@@ -4,10 +4,19 @@ const memeObservable = require('../meme/tasks/memeObservable')();
 const memeSubscribe = require('../meme/tasks/memeSubscribe')();
 const taskMessageBuilder = require('../common/taskMessageBuilder')();
 
+const AUTO_RESPONSE = [
+    'Venha comigo se você quiser viver.',
+    'Eu voltarei.',
+    'Eu preciso de suas roupas, suas botas e sua motocicleta.',
+    'Cai fora.',
+    'Sou... Velho. Não obsoleto.',
+    'Hasta la vista, baby.'
+];
+
 const NOT_FOUND_TASK = () => {
     return {
         notifyAll: (command) => {
-            command.message.reply('Cara você ta loco das idéias, manda alguma chave correta.');
+            command.message.reply(`Você errou o comando mas... ${getAutoResponse()}`);
         }
     };
 };
@@ -21,10 +30,18 @@ const findObservable = (command) => {
     let content = command.message.content;
     for(let key in taskMap) {
         if(content.includes(key)) {
+            console.log(`Found task => ${key}`);
             return taskMap[key];    
         }
     }
-    return taskMap.NOT_FOUND;
+    console.log(`Found task => ${taskMap.NOT_FOUND}`);
+    return taskMap.NOT_FOUND();
+};
+
+const getAutoResponse = () => {
+    let arraySize = AUTO_RESPONSE.length;
+    let index = Math.floor(Math.random() * arraySize);
+    return AUTO_RESPONSE[index];
 };
 
 const BotTask = () => {
@@ -33,6 +50,7 @@ const BotTask = () => {
     return {
         execute: (message) => {
             const command = taskMessageBuilder.build(message);
+            console.log(JSON.stringify(command));
             const observable = findObservable(command);
             observable.notifyAll(command);
         }

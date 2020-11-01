@@ -36,6 +36,7 @@ async function start(message) {
     const connection = await voiceChannel.join();
     const stream = ytdl(_music.link);
     const dispatcher = connection.play(stream);
+    console.log('PlayTask.dispatcher.start()=> Ja deu play aguardando execucao...');
 
     dispatcher.on('start', () => {
         console.log('PlayTask.dispatcher.start()=> Colocando id da musica para execucao...');
@@ -47,7 +48,7 @@ async function start(message) {
         start(message);
     });
 }
-
+/*
 function musicQueueSchedueler() {
     setTimeout(async () => { 
         console.log('PlayTask.musicQueueSchedueler()=> Verificando musicas da fila...');
@@ -61,9 +62,11 @@ function musicQueueSchedueler() {
         }
     }, 2000);
 }
+*/
 
 const play = async (command) => {
     if(command.toca == undefined) {
+        console.log('Commnado toca not found => ' + JSON.stringify(command));
         return;
     }
     try {
